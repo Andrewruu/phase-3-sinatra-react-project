@@ -1,5 +1,9 @@
 source "https://rubygems.org"
 
+# generate fake data to seed db
+# https://github.com/faker-ruby/faker
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'main'
+
 # A DSL for quickly creating web applications
 # https://github.com/sinatra/sinatra
 gem "sinatra", "~> 2.1"
