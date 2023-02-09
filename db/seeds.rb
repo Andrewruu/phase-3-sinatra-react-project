@@ -3,7 +3,7 @@ puts "🌱 Seeding spices..."
 rand(5..10).times do
     Book.create(
         title: Faker::Book.title,
-        image: Faker::LoremFlickr.image,
+        image: "https://cdn.novelupdates.com/images/2015/06/douluo-dalu.jpg",
         summary: Faker::Lorem.sentence,
         author: Faker::Book.author
     )
