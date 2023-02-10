@@ -11,7 +11,6 @@ class ApplicationController < Sinatra::Base
     reviews = book.reviews
     {book: book, reviews: reviews}.to_json
   end
-  
   post "/books" do
     book = Book.create(title: params[:title], image: params[:image], author: params[:author], summary: params[:summary])
     book.to_json
@@ -22,5 +21,24 @@ class ApplicationController < Sinatra::Base
     book.destroy
     book.delete_with_reviews
     book.to_json
+  end
+
+  get "/reviews" do
+    reviews = Review.all
+    reviews.to_json
+  end
+  get "/reviews/:id" do
+    review= Review.find(params[:id])
+    review.to_json
+  end
+
+  post "/reviews" do
+    review = Review.create(name: params[:name], comment: params[:comment], score: params[:score], book_id: params[:book_id])
+    review.to_json
+  end
+  delete "/reviews/:id" do
+    review = Review.find(params[:id])
+    review.destroy
+    review.to_json
   end
 end
