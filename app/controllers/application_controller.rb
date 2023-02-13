@@ -2,6 +2,10 @@ class ApplicationController < Sinatra::Base
   set :default_content_type, 'application/json'
   
   # Add your routes here
+  def format_as_json(book)
+    book.to_json(:include => :reviews)
+  end
+
   get "/books" do
     books = Book.all
     format_as_json(books)
@@ -9,7 +13,7 @@ class ApplicationController < Sinatra::Base
 
   post "/books" do
     book = Book.create(title: params[:title], image: params[:image], author: params[:author], summary: params[:summary])
-    book.to_json
+    format_as_json(book)
   end
 
   delete "/books/:id" do
@@ -26,7 +30,8 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/reviews" do
-    review = Review.create(name: params[:name], comment: params[:comment], score: params[:score], book_id: params[:book_id])
+    book = Book.find(params[:book_id])
+    review = book.reviews.create(name: params[:name], comment: params[:comment], score: params[:score])
     review.to_json
   end
 
@@ -36,9 +41,7 @@ class ApplicationController < Sinatra::Base
     review.to_json
   end
 
-  def format_as_json(book)
-    book.to_json(:include => :reviews)
-  end
+
 
 
 end
