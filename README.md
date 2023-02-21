@@ -1,6 +1,6 @@
 # Phase 3 Project 
 
-# poject info
+# project info
 this is the back end project 
 front-end [link] (https://github.com/Andrewruu/phase3-frontend)
 
